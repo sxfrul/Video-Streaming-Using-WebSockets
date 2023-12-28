@@ -3,7 +3,7 @@ import asyncio
 
 import cv2, base64
 
-port = 5000
+port = 80
 
 print("Started server on port : ", port)
 
@@ -11,7 +11,7 @@ async def transmit(websocket, path):
     print("Client Connected !")
     await websocket.send("Connection Established")
     try :
-        cap = cv2.VideoCapture(1)
+        cap = cv2.VideoCapture(0)
 
         while cap.isOpened():
             _, frame = cap.read()
@@ -20,6 +20,7 @@ async def transmit(websocket, path):
 
             data = str(base64.b64encode(encoded))
             data = data[2:len(data)-1]
+            print(encoded)
             
             await websocket.send(data)
             
@@ -34,7 +35,7 @@ async def transmit(websocket, path):
     # except:
     #     print("Someting went Wrong !")
 
-start_server = websockets.serve(transmit, host="192.168.246.223", port=port)
+start_server = websockets.serve(transmit, host="192.168.0.140", port=port)
 
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()

@@ -35,7 +35,7 @@ class _VideoStreamState extends State<VideoStream> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Live Video"),
+        title: const Text("EYE(i) Cam"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),

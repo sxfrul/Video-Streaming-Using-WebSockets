@@ -45,61 +45,61 @@ class _VideoStreamState extends State<VideoStream> {
         crossAxisSpacing: 10,
         children: [
           Container(
-          padding: const EdgeInsets.all(20.0),
-          decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(15)),
-                color: Colors.white
-          ),
-          child: Center(
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () => connect(context),
-                      style: Styles.buttonStyle,
-                      child: const Text("Connect"),
-                    ),
-                    ElevatedButton(
-                      onPressed: disconnect,
-                      style: Styles.buttonStyle,
-                      child: const Text("Disconnect"),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 50.0,
-                ),
-                _isConnected
-                    ? StreamBuilder(
-                        stream: _socket.stream,
-                        builder: (context, snapshot) {
-                          if (!snapshot.hasData) {
-                            return const CircularProgressIndicator();
-                          }
-
-                          if (snapshot.connectionState == ConnectionState.done) {
-                            return const Center(
-                              child: Text("Connection Closed !"),
-                            );
-                          }
-                          //? Working for single frames
-                          return Image.memory(
-                            Uint8List.fromList(
-                              base64Decode(
-                                (snapshot.data.toString()),
-                              ),
-                            ),
-                            gaplessPlayback: true,
-                            excludeFromSemantics: true,
-                          );
-                        },
-                      )
-                    : const Text("Initiate Connection")
-              ],
+            padding: const EdgeInsets.all(20.0),
+            decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                  color: Colors.white
             ),
-          ),
+            child: Center(
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () => connect(context),
+                        style: Styles.buttonStyle,
+                        child: const Text("Connect"),
+                      ),
+                      ElevatedButton(
+                        onPressed: disconnect,
+                        style: Styles.buttonStyle,
+                        child: const Text("Disconnect"),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 18,
+                  ),
+                  _isConnected
+                      ? StreamBuilder(
+                          stream: _socket.stream,
+                          builder: (context, snapshot) {
+                            if (!snapshot.hasData) {
+                              return const CircularProgressIndicator();
+                            }
+
+                            if (snapshot.connectionState == ConnectionState.done) {
+                              return const Center(
+                                child: Text("Connection Closed !"),
+                              );
+                            }
+                            //? Working for single frames
+                            return Image.memory(
+                              Uint8List.fromList(
+                                base64Decode(
+                                  (snapshot.data.toString()),
+                                ),
+                              ),
+                              gaplessPlayback: true,
+                              excludeFromSemantics: true,
+                            );
+                          },
+                        )
+                      : const Text("Initiate Connection")
+                ],
+              ),
+            ),
           ),
         ]
       )

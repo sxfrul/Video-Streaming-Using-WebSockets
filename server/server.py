@@ -15,6 +15,7 @@ async def transmit(websocket, path):
 
         while cap.isOpened():
             _, frame = cap.read()
+            frame = cv2.flip(frame,1)
             
             encoded = cv2.imencode('.jpg', frame)[1]
 

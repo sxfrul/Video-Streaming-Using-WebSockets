@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 
 class Styles {
   static final buttonStyle =
-      ElevatedButton.styleFrom(fixedSize: const Size(120.0, 10.0));
+      ElevatedButton.styleFrom(
+        fixedSize: const Size(120.0, 10.0),
+        foregroundColor: Colors.black,
+        backgroundColor: const Color.fromARGB(255, 243, 243, 243),
+        );
 
   static final buttonStyle2 = ElevatedButton.styleFrom(
     padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 30),

@@ -11,7 +11,7 @@ class Styles {
         Radius.circular(30),
       ),
     ),
-    primary: Colors.blue,
+    backgroundColor: Colors.black,
     minimumSize: const Size(200, 40),
   );
 

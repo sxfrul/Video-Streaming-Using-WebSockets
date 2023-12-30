@@ -40,9 +40,16 @@ class _VideoStreamState extends State<VideoStream> {
       body:
       GridView.count(
         crossAxisCount: 2,
+        padding: const EdgeInsets.all(35),
+        mainAxisSpacing: 10,
+        crossAxisSpacing: 10,
         children: [
           Container(
           padding: const EdgeInsets.all(20.0),
+          decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(15)),
+                color: Colors.white
+          ),
           child: Center(
             child: Column(
               children: [

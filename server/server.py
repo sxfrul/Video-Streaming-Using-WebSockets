@@ -1,5 +1,6 @@
 import websockets
 import asyncio
+from cvzone.FaceDetectionModule import FaceDetector
 
 import cv2, base64
 
@@ -12,10 +13,13 @@ async def transmit(websocket, path):
     await websocket.send("Connection Established")
     try :
         cap = cv2.VideoCapture(0)
+        detector = FaceDetector(minDetectionCon=0.5)
 
         while cap.isOpened():
             _, frame = cap.read()
             frame = cv2.flip(frame,1)
+
+            frame, bboxs = detector.findFaces(frame)
             
             encoded = cv2.imencode('.jpg', frame)[1]
 

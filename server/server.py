@@ -4,7 +4,7 @@ from cvzone.FaceDetectionModule import FaceDetector
 
 import cv2, base64
 
-port = 80
+port = 8000
 
 print("Started server on port : ", port)
 
@@ -12,7 +12,7 @@ async def transmit(websocket, path):
     print("Client Connected !")
     await websocket.send("Connection Established")
     try :
-        
+
         #Raspberry Pi Camera
         #cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
 

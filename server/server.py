@@ -5,6 +5,7 @@ import asyncio
 from cvzone.FaceDetectionModule import FaceDetector
 import time
 import cv2, base64
+import functools
 
 #eyero original dependencies:
 import speech_recognition as sr  

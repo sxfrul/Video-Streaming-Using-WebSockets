@@ -125,13 +125,14 @@ async def transmit(websocket, path, initial_number):
     await websocket.send("Connection Established")
     try :
 
-        #Raspberry Pi Camera
-        #cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
         servoX_pin = 15
         servoY_pin = 14
 
         pwm = PCA9685(0x40, debug=False)
         pwm.setPWMFreq(50)
+        
+        #Raspberry Pi Camera
+        #cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
         cap = cv2.VideoCapture(0) 
         detector = FaceDetector(minDetectionCon=0.5)
 

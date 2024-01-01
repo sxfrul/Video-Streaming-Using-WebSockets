@@ -1,12 +1,21 @@
+from multiprocessing import Process
 import websockets
 import asyncio
 from cvzone.FaceDetectionModule import FaceDetector
+import time
 
 import cv2, base64
 
 port = 8000
 
 print("Started server on port : ", port)
+
+def cam():
+    number = 10
+    while True:
+        print(number)
+        number += 10
+        time.sleep(0.5)
 
 async def transmit(websocket, path):
     print("Client Connected !")
@@ -37,13 +46,21 @@ async def transmit(websocket, path):
             # if cv2.waitKey(1) & 0xFF == ord('q'):
             #     break
         cap.release()
-    except websockets.connection.ConnectionClosed as e:
+    except Exception as e:
         print("Client Disconnected !")
         cap.release()
     # except:
     #     print("Someting went Wrong !")
 
-start_server = websockets.serve(transmit, host="192.168.0.140", port=port)
+# start_server = websockets.serve(transmit, host="192.168.0.140", port=port)
 
-asyncio.get_event_loop().run_until_complete(start_server)
-asyncio.get_event_loop().run_forever()
+# asyncio.get_event_loop().run_until_complete(start_server)
+# asyncio.get_event_loop().run_forever()
+
+if __name__ == '__main__':
+    p = Process(target=cam)
+    p.start()
+    start_server = websockets.serve(transmit, host="192.168.0.140", port=port)
+
+    asyncio.get_event_loop().run_until_complete(start_server)
+    asyncio.get_event_loop().run_forever()

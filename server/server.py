@@ -3,6 +3,7 @@ import websockets
 import asyncio
 from cvzone.FaceDetectionModule import FaceDetector
 import time
+import functools
 
 import cv2, base64
 
@@ -10,15 +11,31 @@ port = 8000
 
 print("Started server on port : ", port)
 
-def cam():
+def test():
+    global number
     number = 10
     while True:
         print(number)
         number += 10
-        time.sleep(0.5)
+        time.sleep(2)
 
-async def transmit(websocket, path):
+
+def cam():
+    cap = cv2.VideoCapture(0) 
+    detector = FaceDetector(minDetectionCon=0.5)
+
+    while cap.isOpened():
+            _, frame = cap.read()
+            frame = cv2.flip(frame,1)
+
+            frame, bboxs = detector.findFaces(frame)
+            
+            encoded = cv2.imencode('.jpg', frame)[1]
+
+async def transmit(websocket, path, initial_number):
     print("Client Connected !")
+    print(f"This is initial number: {initial_number}")
+
     await websocket.send("Connection Established")
     try :
 
@@ -52,15 +69,18 @@ async def transmit(websocket, path):
     # except:
     #     print("Someting went Wrong !")
 
+
 # start_server = websockets.serve(transmit, host="192.168.0.140", port=port)
 
 # asyncio.get_event_loop().run_until_complete(start_server)
 # asyncio.get_event_loop().run_forever()
 
 if __name__ == '__main__':
-    p = Process(target=cam)
-    p.start()
-    start_server = websockets.serve(transmit, host="192.168.0.140", port=port)
-
+    # p = Process(target=test)
+    # p.start()
+    test = 10
+    start_server = websockets.serve(functools.partial(transmit, initial_number=test), host="192.168.0.140", port=port)
     asyncio.get_event_loop().run_until_complete(start_server)
     asyncio.get_event_loop().run_forever()
+
+    

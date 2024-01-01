@@ -33,7 +33,7 @@ class WebSocket {
 
   /// Connects the current application to a websocket
   void connect() async {
-    _channel = WebSocketChannel.connect(Uri.parse("ws://192.168.0.140:80"));
+    _channel = WebSocketChannel.connect(Uri.parse("ws://192.168.0.170:80"));
   }
 
   /// Disconnects the current application from a websocket

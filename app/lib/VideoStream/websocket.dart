@@ -7,6 +7,7 @@ class WebSocket {
   // ------------------------- Members ------------------------- //
   late String url;
   WebSocketChannel? _channel;
+  WebSocketChannel? _secondchannel;
   StreamController<bool> streamController = StreamController<bool>.broadcast();
 
   // ---------------------- Getter Setters --------------------- //
@@ -37,7 +38,7 @@ class WebSocket {
   }
 
   void connect_test() async {
-    _channel = WebSocketChannel.connect(Uri.parse("ws://192.168.0.140:8000/test"));
+    _secondchannel = WebSocketChannel.connect(Uri.parse("ws://192.168.0.140:8000/test"));
   }
 
   /// Disconnects the current application from a websocket

@@ -32,6 +32,7 @@ async def transmit(websocket, path):
          print("Connected to server/websocket/test")
 
     if path == "/camera":
+      print("Connected to server/websocket/camera")
       try :
 
           #Raspberry Pi Camera

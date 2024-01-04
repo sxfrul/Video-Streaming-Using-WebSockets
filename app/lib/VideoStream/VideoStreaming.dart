@@ -16,8 +16,9 @@ class VideoStream extends StatefulWidget {
 
 class _VideoStreamState extends State<VideoStream> {
   final WebSocket _socket = WebSocket(Constants.videoWebsocketURL);
-  final WebSocket _testsocket = WebSocket(Constants.testSocketURL);
+  final WebSocket2 _testsocket = WebSocket2(Constants.testSocketURL);
   bool _isConnected = false;
+  bool _isTestConnected = false;
   void connect(BuildContext context) async {
     _socket.connect();
     setState(() {
@@ -28,7 +29,14 @@ class _VideoStreamState extends State<VideoStream> {
   void connect_test(BuildContext context) async {
     _testsocket.connect();
     setState(() {
-      _isConnected = true;
+      _isTestConnected = true;
+    });
+  }
+
+  void disconnect_test(BuildContext context) async {
+    _testsocket.disconnect();
+    setState(() {
+      _isTestConnected = false;
     });
   }
 

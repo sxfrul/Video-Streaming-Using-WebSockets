@@ -7,7 +7,6 @@ class WebSocket {
   // ------------------------- Members ------------------------- //
   late String url;
   WebSocketChannel? _channel;
-  WebSocketChannel? _secondchannel;
   StreamController<bool> streamController = StreamController<bool>.broadcast();
 
   // ---------------------- Getter Setters --------------------- //
@@ -36,12 +35,45 @@ class WebSocket {
   void connect() async {
     _channel = WebSocketChannel.connect(Uri.parse("ws://192.168.0.140:8000/camera"));
   }
+  /// Disconnects the current application from a websocket
+  void disconnect() {
+    _channel!.sink.close();
+  }
+}
 
-  void connect_test() async {
-    _secondchannel = WebSocketChannel.connect(Uri.parse("ws://192.168.0.140:8000/test"));
+class WebSocket2 {
+  // ------------------------- Members ------------------------- //
+  late String url;
+  WebSocketChannel? _channel;
+  StreamController<bool> streamController = StreamController<bool>.broadcast();
+
+  // ---------------------- Getter Setters --------------------- //
+  String get getUrl {
+    return url;
   }
 
-  /// Disconnects the current application from a websocket
+  set setUrl(String url) {
+    this.url = url;
+  }
+
+  Stream<dynamic> get stream {
+    if (_channel != null) {
+      return _channel!.stream;
+    } else {
+      throw WebSocketChannelException("The connection was not established !");
+    }
+  }
+
+  // --------------------- Constructor ---------------------- //
+  WebSocket2(this.url);
+
+  // ---------------------- Functions ----------------------- //
+
+  /// Connects the current application to a websocket
+  void connect() async {
+    _channel = WebSocketChannel.connect(Uri.parse("ws://192.168.0.140:8000/test"));
+  }
+
   void disconnect() {
     _channel!.sink.close();
   }

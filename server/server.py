@@ -2,8 +2,6 @@ from multiprocessing import Process
 import websockets
 import asyncio
 from cvzone.FaceDetectionModule import FaceDetector
-import time
-import functools
 
 import cv2, base64
 
@@ -29,10 +27,11 @@ async def transmit(websocket, path):
 
 
     if path == "/test":
-         print("Connected to server/websocket/test")
+         print("Test")
+         print("Client connected to [server/websocket/test]")
 
     if path == "/camera":
-      print("Connected to server/websocket/camera")
+      print("Connected to [server/websocket/camera]")
       try :
 
           #Raspberry Pi Camera

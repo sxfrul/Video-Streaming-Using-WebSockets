@@ -56,7 +56,7 @@ class _VideoStreamState extends State<VideoStream> {
       // ),
       body:
       GridView.count(
-        crossAxisCount: 2,
+        crossAxisCount: 1,
         padding: const EdgeInsets.all(35),
         mainAxisSpacing: 10,
         crossAxisSpacing: 10,

@@ -22,7 +22,6 @@ def cam():
             encoded = cv2.imencode('.jpg', frame)[1]
 
 async def transmit(websocket, path):
-    print("Client connected to some server!")
     await websocket.send("Connection Established")
 
 

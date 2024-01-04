@@ -34,12 +34,16 @@ class _VideoStreamState extends State<VideoStream> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text("EYE(i) Cam"),
-      // ),
+      appBar: AppBar(
+        title: Image.asset('assets/sftls_logo.jpg',
+        height: 240,
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.white,
+      ),
       body:
       GridView.count(
-        crossAxisCount: 2,
+        crossAxisCount: 1,
         padding: const EdgeInsets.all(35),
         mainAxisSpacing: 10,
         crossAxisSpacing: 10,

@@ -24,38 +24,43 @@ def cam():
             encoded = cv2.imencode('.jpg', frame)[1]
 
 async def transmit(websocket, path):
-    print("Client Connected !")
-
+    print("Client connected to some server!")
     await websocket.send("Connection Established")
-    try :
 
-        #Raspberry Pi Camera
-        #cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
 
-        cap = cv2.VideoCapture(0) 
-        detector = FaceDetector(minDetectionCon=0.5)
+    if path == "/test":
+         print("Connected to server/websocket/test")
 
-        while cap.isOpened():
-            _, frame = cap.read()
-            frame = cv2.flip(frame,1)
+    if path == "/camera":
+      try :
 
-            frame, bboxs = detector.findFaces(frame)
-            
-            encoded = cv2.imencode('.jpg', frame)[1]
+          #Raspberry Pi Camera
+          #cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
 
-            data = str(base64.b64encode(encoded))
-            data = data[2:len(data)-1]
-            
-            await websocket.send(data)
-            
-            # cv2.imshow("Transimission", frame)
-            
-            # if cv2.waitKey(1) & 0xFF == ord('q'):
-            #     break
-        cap.release()
-    except Exception as e:
-        print("Client Disconnected !")
-        cap.release()
+          cap = cv2.VideoCapture(0) 
+          detector = FaceDetector(minDetectionCon=0.5)
+
+          while cap.isOpened():
+              _, frame = cap.read()
+              frame = cv2.flip(frame,1)
+
+              frame, bboxs = detector.findFaces(frame)
+              
+              encoded = cv2.imencode('.jpg', frame)[1]
+
+              data = str(base64.b64encode(encoded))
+              data = data[2:len(data)-1]
+              
+              await websocket.send(data)
+              
+              # cv2.imshow("Transimission", frame)
+              
+              # if cv2.waitKey(1) & 0xFF == ord('q'):
+              #     break
+          cap.release()
+      except Exception as e:
+          print("Client Disconnected !")
+          cap.release()
     # except:
     #     print("Someting went Wrong !")
 

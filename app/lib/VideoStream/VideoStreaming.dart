@@ -33,7 +33,7 @@ class _VideoStreamState extends State<VideoStream> {
     });
   }
 
-  void disconnect_test(BuildContext context) async {
+  void disconnect_test() {
     _testsocket.disconnect();
     setState(() {
       _isTestConnected = false;
@@ -89,7 +89,7 @@ class _VideoStreamState extends State<VideoStream> {
                         child: const Text("Disconnect"),
                       ),
                       ElevatedButton(
-                        onPressed: () => disconnect_test(context),
+                        onPressed: () => disconnect_test(),
                         style: Styles.buttonStyle,
                         child: const Text("Test DC"),
                       ),

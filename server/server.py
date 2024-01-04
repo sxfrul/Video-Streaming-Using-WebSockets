@@ -26,8 +26,12 @@ async def transmit(websocket, path):
 
 
     if path == "/test":
-         print("Test")
-         print("Client connected to [server/websocket/test]")
+      try:
+          print("Test")
+          print("Client connected to [server/websocket/test]")
+      except Exception as e:
+          print("Client Disconnected !")
+          cap.release()
 
     if path == "/camera":
       print("Connected to [server/websocket/camera]")

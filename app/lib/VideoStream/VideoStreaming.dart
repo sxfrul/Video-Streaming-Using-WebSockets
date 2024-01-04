@@ -89,9 +89,9 @@ class _VideoStreamState extends State<VideoStream> {
                         child: const Text("Disconnect"),
                       ),
                       ElevatedButton(
-                        onPressed: () => connect_test(context),
+                        onPressed: () => disconnect_test(context),
                         style: Styles.buttonStyle,
-                        child: const Text("Test Disconnect"),
+                        child: const Text("Test DC"),
                       ),
                     ],
                   ),

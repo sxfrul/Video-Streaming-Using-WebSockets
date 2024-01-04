@@ -145,25 +145,12 @@ class _VideoStreamState extends State<VideoStream> {
                           borderRadius: BorderRadius.all(Radius.circular(15)),
                           color: Color.fromARGB(255, 255, 146, 138)
                         ),
-                        child:
-                          _isConnected
-                          ? StreamBuilder(
-                              stream: _socket.stream,
-                              builder: (context, snapshot) {
-                                if (!snapshot.hasData) {
-                                  return const CircularProgressIndicator();
-                                }
-
-                                if (snapshot.connectionState == ConnectionState.done) {
-                                  return const Center(
-                                    child: Text("Connection Closed !"),
-                                  );
-                                }
-                                //? Working for single frames
-                                return Text("data");
-                              },
+                        child: const Center(
+                          child: Text(
+                            "KITCHEN",
+                            textAlign: TextAlign.center,
                             )
-                        : const Text("Initiate Connection")
+                        )
                       ),
                     ]
                     ),

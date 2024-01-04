@@ -11,15 +11,6 @@ port = 8000
 
 print("Started server on port : ", port)
 
-def test():
-    global number
-    number = 10
-    while True:
-        print(number)
-        number += 10
-        time.sleep(2)
-
-
 def cam():
     cap = cv2.VideoCapture(0) 
     detector = FaceDetector(minDetectionCon=0.5)
@@ -32,9 +23,8 @@ def cam():
             
             encoded = cv2.imencode('.jpg', frame)[1]
 
-async def transmit(websocket, path, initial_number):
+async def transmit(websocket, path):
     print("Client Connected !")
-    print(f"This is initial number: {initial_number}")
 
     await websocket.send("Connection Established")
     try :
@@ -78,8 +68,7 @@ async def transmit(websocket, path, initial_number):
 if __name__ == '__main__':
     # p = Process(target=test)
     # p.start()
-    test = 10
-    start_server = websockets.serve(functools.partial(transmit, initial_number=test), host="192.168.0.140", port=port)
+    start_server = websockets.serve(transmit, host="192.168.0.140", port=port)
     asyncio.get_event_loop().run_until_complete(start_server)
     asyncio.get_event_loop().run_forever()
 

@@ -16,9 +16,17 @@ class VideoStream extends StatefulWidget {
 
 class _VideoStreamState extends State<VideoStream> {
   final WebSocket _socket = WebSocket(Constants.videoWebsocketURL);
+  final WebSocket _testsocket = WebSocket(Constants.testSocketURL);
   bool _isConnected = false;
   void connect(BuildContext context) async {
     _socket.connect();
+    setState(() {
+      _isConnected = true;
+    });
+  }
+
+  void connect_test(BuildContext context) async {
+    _testsocket.connect();
     setState(() {
       _isConnected = true;
     });
@@ -30,6 +38,7 @@ class _VideoStreamState extends State<VideoStream> {
       _isConnected = false;
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +67,11 @@ class _VideoStreamState extends State<VideoStream> {
                     children: [
                       ElevatedButton(
                         onPressed: () => connect(context),
+                        style: Styles.buttonStyle,
+                        child: const Text("Connect"),
+                      ),
+                      ElevatedButton(
+                        onPressed: () => connect_test(context),
                         style: Styles.buttonStyle,
                         child: const Text("Connect"),
                       ),

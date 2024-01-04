@@ -45,7 +45,7 @@ class _VideoStreamState extends State<VideoStream> {
       GridView.count(
         crossAxisCount: 1,
         padding: const EdgeInsets.all(35),
-        mainAxisSpacing: 10,
+        mainAxisSpacing: 15,
         crossAxisSpacing: 10,
         children: [
           Container(
@@ -103,6 +103,142 @@ class _VideoStreamState extends State<VideoStream> {
                       : const Text("Initiate Connection")
                 ],
               ),
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(15.0),
+            decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                  color: Colors.white
+            ),
+            child: GridView.count(
+              crossAxisCount: 1,
+              
+              mainAxisSpacing: 15,
+              crossAxisSpacing: 10,
+              childAspectRatio: (10.8 / 3.2),
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(10.0),
+                  decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(15)),
+                        color: Colors.red
+                  ),
+                  child: GridView.count(
+                    crossAxisCount: 2,
+                    childAspectRatio: (2.1/ 1),
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(0.0),
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(15)),
+                          
+                          image: DecorationImage(
+                            image: AssetImage("assets/on_lightbulb.png"),
+                            
+                          )
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(20.0),
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(15)),
+                          color: Color.fromARGB(255, 255, 146, 138)
+                        ),
+                        child:
+                          _isConnected
+                          ? StreamBuilder(
+                              stream: _socket.stream,
+                              builder: (context, snapshot) {
+                                if (!snapshot.hasData) {
+                                  return const CircularProgressIndicator();
+                                }
+
+                                if (snapshot.connectionState == ConnectionState.done) {
+                                  return const Center(
+                                    child: Text("Connection Closed !"),
+                                  );
+                                }
+                                //? Working for single frames
+                                return Text("data");
+                              },
+                            )
+                        : const Text("Initiate Connection")
+                      ),
+                    ]
+                    ),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(10.0),
+                  decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(15)),
+                        color: Colors.green
+                  ),
+                  child: GridView.count(
+                    crossAxisCount: 2,
+                    childAspectRatio: (2.1/ 1),
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(20.0),
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(15)),
+                          image: DecorationImage(
+                            image: AssetImage("assets/on_lightbulb.png")
+                          )
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(20.0),
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(15)),
+                          color: Color.fromARGB(255, 171, 255, 174)
+                        ),
+                        child: const Center(
+                          child: Text(
+                            "BATHROOM",
+                            textAlign: TextAlign.center,
+                            )
+                        )
+                      ),
+                    ]
+                    ),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(10.0),
+                  decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(15)),
+                        color: Colors.blue
+                  ),
+                  child: GridView.count(
+                    crossAxisCount: 2,
+                    childAspectRatio: (2.1/ 1),
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(20.0),
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(15)),
+                          image: DecorationImage(
+                            image: AssetImage("assets/on_lightbulb.png")
+                          )
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(20.0),
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(15)),
+                          color: Color.fromARGB(255, 152, 209, 255)
+                        ),
+                        child: const Center(
+                          child: Text(
+                            "BEDROOM",
+                            textAlign: TextAlign.center,
+                            )
+                        )
+                      ),
+                    ]
+                    ),
+                ),
+              ],
             ),
           ),
         ]

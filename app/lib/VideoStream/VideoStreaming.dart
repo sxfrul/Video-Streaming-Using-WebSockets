@@ -34,71 +34,197 @@ class _VideoStreamState extends State<VideoStream> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text("EYE(i) Cam"),
-      // ),
+      appBar: AppBar(
+        title: Image.asset('assets/sftls_logo.jpg',
+        height: 240,
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.white,
+      ),
       body:
       GridView.count(
-        crossAxisCount: 2,
+        crossAxisCount: 1,
         padding: const EdgeInsets.all(35),
-        mainAxisSpacing: 10,
+        mainAxisSpacing: 15,
         crossAxisSpacing: 10,
         children: [
           Container(
-          padding: const EdgeInsets.all(20.0),
-          decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(15)),
-                color: Colors.white
-          ),
-          child: Center(
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () => connect(context),
-                      style: Styles.buttonStyle,
-                      child: const Text("Connect"),
-                    ),
-                    ElevatedButton(
-                      onPressed: disconnect,
-                      style: Styles.buttonStyle,
-                      child: const Text("Disconnect"),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 50.0,
-                ),
-                _isConnected
-                    ? StreamBuilder(
-                        stream: _socket.stream,
-                        builder: (context, snapshot) {
-                          if (!snapshot.hasData) {
-                            return const CircularProgressIndicator();
-                          }
+            padding: const EdgeInsets.all(20.0),
+            decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                  color: Colors.white
+            ),
+            child: Center(
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () => connect(context),
+                        style: Styles.buttonStyle,
+                        child: const Text("Connect"),
+                      ),
+                      ElevatedButton(
+                        onPressed: disconnect,
+                        style: Styles.buttonStyle,
+                        child: const Text("Disconnect"),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 18,
+                  ),
+                  _isConnected
+                      ? StreamBuilder(
+                          stream: _socket.stream,
+                          builder: (context, snapshot) {
+                            if (!snapshot.hasData) {
+                              return const CircularProgressIndicator();
+                            }
 
-                          if (snapshot.connectionState == ConnectionState.done) {
-                            return const Center(
-                              child: Text("Connection Closed !"),
+                            if (snapshot.connectionState == ConnectionState.done) {
+                              return const Center(
+                                child: Text("Connection Closed !"),
+                              );
+                            }
+
+                            // Decoding every frame (binary)
+                            Uint8List imageData = Uint8List.fromList(snapshot.data!);
+                            return Image.memory(
+                              imageData,
+                              gaplessPlayback: true,
+                              excludeFromSemantics: true,
                             );
-                          }
-                          
-                          // Convert the List<int> to Uint8List
-                          Uint8List imageData = Uint8List.fromList(snapshot.data!);
-                          //? Working for single frames
-                          return Image.memory(
-                            imageData,
-                            gaplessPlayback: true,
-                            excludeFromSemantics: true,
-                          );
-                        },
-                      )
-                    : const Text("Initiate Connection")
-              ],
+                          },
+                        )
+                      : const Text("Initiate Connection")
+                ],
+              ),
             ),
           ),
+          Container(
+            padding: const EdgeInsets.all(15.0),
+            decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                  color: Colors.white
+            ),
+            child: GridView.count(
+              crossAxisCount: 1,
+              
+              mainAxisSpacing: 15,
+              crossAxisSpacing: 10,
+              childAspectRatio: (10.8 / 3.2),
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(10.0),
+                  decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(15)),
+                        color: Colors.red
+                  ),
+                  child: GridView.count(
+                    crossAxisCount: 2,
+                    childAspectRatio: (2.1/ 1),
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(0.0),
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(15)),
+                          
+                          image: DecorationImage(
+                            image: AssetImage("assets/on_lightbulb.png"),
+                            
+                          )
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(20.0),
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(15)),
+                          color: Color.fromARGB(255, 255, 146, 138)
+                        ),
+                        child: const Center(
+                          child: Text(
+                            "KITCHEN",
+                            textAlign: TextAlign.center,
+                            )
+                        )
+                      ),
+                    ]
+                    ),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(10.0),
+                  decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(15)),
+                        color: Colors.green
+                  ),
+                  child: GridView.count(
+                    crossAxisCount: 2,
+                    childAspectRatio: (2.1/ 1),
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(20.0),
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(15)),
+                          image: DecorationImage(
+                            image: AssetImage("assets/on_lightbulb.png")
+                          )
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(20.0),
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(15)),
+                          color: Color.fromARGB(255, 171, 255, 174)
+                        ),
+                        child: const Center(
+                          child: Text(
+                            "BATHROOM",
+                            textAlign: TextAlign.center,
+                            )
+                        )
+                      ),
+                    ]
+                    ),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(10.0),
+                  decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(15)),
+                        color: Colors.blue
+                  ),
+                  child: GridView.count(
+                    crossAxisCount: 2,
+                    childAspectRatio: (2.1/ 1),
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(20.0),
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(15)),
+                          image: DecorationImage(
+                            image: AssetImage("assets/on_lightbulb.png")
+                          )
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(20.0),
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(15)),
+                          color: Color.fromARGB(255, 152, 209, 255)
+                        ),
+                        child: const Center(
+                          child: Text(
+                            "BEDROOM",
+                            textAlign: TextAlign.center,
+                            )
+                        )
+                      ),
+                    ]
+                    ),
+                ),
+              ],
+            ),
           ),
         ]
       )

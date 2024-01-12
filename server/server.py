@@ -1,7 +1,7 @@
 import websockets
 import asyncio
 
-import cv2, base64
+import cv2
 
 port = 8000
 

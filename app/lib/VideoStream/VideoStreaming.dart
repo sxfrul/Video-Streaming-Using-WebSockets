@@ -86,7 +86,7 @@ class _VideoStreamState extends State<VideoStream> {
                           }
                           
                           // Convert the List<int> to Uint8List
-                            Uint8List imageData = Uint8List.fromList(snapshot.data!);
+                          Uint8List imageData = Uint8List.fromList(snapshot.data!);
                           //? Working for single frames
                           return Image.memory(
                             imageData,

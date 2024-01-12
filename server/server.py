@@ -16,10 +16,8 @@ async def transmit(websocket, path):
         while cap.isOpened():
             _, frame = cap.read()
             
-            encoded = cv2.imencode('.jpg', frame)[1]
-
-            data = str(base64.b64encode(encoded))
-            data = data[2:len(data)-1]
+            encoded = cv2.imencode('.jpg', frame)[1].tobytes()
+            data = bytes(encoded)
             
             await websocket.send(data)
             

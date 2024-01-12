@@ -89,11 +89,7 @@ class _VideoStreamState extends State<VideoStream> {
                             Uint8List imageData = Uint8List.fromList(snapshot.data!);
                           //? Working for single frames
                           return Image.memory(
-                            Uint8List.fromList(
-                              base64Decode(
-                                (snapshot.data.toString()),
-                              ),
-                            ),
+                            imageData,
                             gaplessPlayback: true,
                             excludeFromSemantics: true,
                           );

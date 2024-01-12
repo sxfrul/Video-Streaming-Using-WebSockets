@@ -3,7 +3,7 @@ import asyncio
 
 import cv2, base64
 
-port = 80
+port = 8000
 
 print("Started server on port : ", port)
 

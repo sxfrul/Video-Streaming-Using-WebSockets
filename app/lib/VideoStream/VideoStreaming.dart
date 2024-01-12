@@ -88,13 +88,11 @@ class _VideoStreamState extends State<VideoStream> {
                                 child: Text("Connection Closed !"),
                               );
                             }
-                            //? Working for single frames
+
+                            // Decoding every frame (binary)
+                            Uint8List imageData = Uint8List.fromList(snapshot.data!);
                             return Image.memory(
-                              Uint8List.fromList(
-                                base64Decode(
-                                  (snapshot.data.toString()),
-                                ),
-                              ),
+                              imageData,
                               gaplessPlayback: true,
                               excludeFromSemantics: true,
                             );

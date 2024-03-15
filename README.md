@@ -1,3 +1,15 @@
+# `EYE (i) ROBOT Mobile App`
+
+![Static Badge](https://img.shields.io/badge/mission-refining%20home%20assistants%20with%20AI-purple)
+<br />
+![GitHub language count](https://img.shields.io/github/languages/count/sxfrul/Video-Streaming-Using-WebSockets)
+![GitHub last commit](https://img.shields.io/github/last-commit/sxfrul/Video-Streaming-Using-WebSockets)
+<br /> <br />
+Relevant links:
+<br/>
+[Main Repository](https://github.com/sxfrul/EYE-I-ROBOT) |
+[ESP8266 Smart Light Demo](https://github.com/sxfrul/EYE--i--ROBOT--lights_demo-)
+
 # Live Video Streaming Application in Flutter using WebSockets <!-- omit in toc -->
 
 # Contents <!-- omit in toc -->

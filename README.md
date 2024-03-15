@@ -7,7 +7,7 @@
 <br /> <br />
 Relevant links:
 <br/>
-[Main Repository](https://github.com/sxfrul/EYE-I-ROBOT) |
+[Main Project](https://github.com/sxfrul/EYE-I-ROBOT) |
 [ESP8266 Smart Light Demo](https://github.com/sxfrul/EYE--i--ROBOT--lights_demo-)
 
 # Live Video Streaming Application in Flutter using WebSockets <!-- omit in toc -->
